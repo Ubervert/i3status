@@ -297,7 +297,10 @@ int main(int argc, char *argv[]) {
         };
         
         cfg_opt_t pianobar_opts[] = {
-        }
+                CFG_STR("playing", NULL, CFGF_NONE),
+                CFG_CUSTOM_COLOR_OPTS,
+                CFG_END()
+        };
 
         cfg_opt_t opts[] = {
                 CFG_STR_LIST("order", "{}", CFGF_NONE),
@@ -316,6 +319,7 @@ int main(int argc, char *argv[]) {
                 CFG_SEC("load", load_opts, CFGF_NONE),
                 CFG_SEC("cpu_usage", usage_opts, CFGF_NONE),
                 CFG_SEC("mpd", mpd_opts, CFGF_NONE),
+                CFG_SEC("pianobar", pianobar_opts, CFGF_NONE),
                 CFG_CUSTOM_COLOR_OPTS,
                 CFG_END()
         };
@@ -515,9 +519,14 @@ int main(int argc, char *argv[]) {
                                 print_cpu_usage(json_gen, buffer, cfg_getstr(sec, "format"));
                                 SEC_CLOSE_MAP;
                         }
-                        CASE_SEC("cpu_usage") {
+                        CASE_SEC("mpd") {
                                 SEC_OPEN_MAP("mpd");
-                                print_mpd(json_gen, buffer, cfg_getstr(sec, "format"), cfg_getstr(sec, "format_off"), cfg_getstr(sec, "host"), cfg_getstr(sec, "port"));
+                                print_mpd(json_gen, buffer, cfg_getstr(sec, "format"), cfg_getstr(sec, "format_off"), cfg_getstr(sec, "host"), cfg_getint(sec, "port"));
+                                SEC_CLOSE_MAP;
+                        }
+                        CASE_SEC("pianobar") {
+                                SEC_OPEN_MAP("pianobar");
+                                print_pianobar(json_gen, buffer);
                                 SEC_CLOSE_MAP;
                         }
                 }

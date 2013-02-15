@@ -13,6 +13,7 @@ enum { O_DZEN2, O_XMOBAR, O_I3BAR, O_NONE } output_format;
 
 #define BEGINS_WITH(haystack, needle) (strncmp(haystack, needle, strlen(needle)) == 0)
 #define max(a, b) ((a) > (b) ? (a) : (b))
+#define PIANOBAR_NOWPLAYING "%s/.config/pianobar/nowplaying"
 
 #if defined(LINUX)
 
@@ -154,6 +155,7 @@ void print_eth_info(yajl_gen json_gen, char *buffer, const char *interface, cons
 void print_load(yajl_gen json_gen, char *buffer, const char *format);
 void print_volume(yajl_gen json_gen, char *buffer, const char *fmt, const char *device, const char *mixer, int mixer_idx);
 void print_mpd(yajl_gen json_gen, char *buffer, const char *format, const char *format_off, const char *host, int port);
+void print_pianobar(yajl_gen json_gen, char *buffer);
 bool process_runs(const char *path);
 
 /* socket file descriptor for general purposes */

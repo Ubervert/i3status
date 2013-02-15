@@ -65,13 +65,13 @@ int _print_path(char* buffer, struct mpd_connection* co, struct mpd_status *stat
  */
 #define MPDPRINT(NAME)	{ #NAME, sizeof(#NAME) - 1, _print_##NAME }
 struct {
-	const char* name;
-	int len;
-	int (*func)(char* buffer,
-	struct mpd_connection* co,
-	struct mpd_status *status,
-	struct mpd_song *song);
-}	g_mpd_vars[] = {
+	const char*	name;
+	int			len;
+	int			(*func)(char* buffer,
+						struct mpd_connection* co,
+						struct mpd_status *status,
+						struct mpd_song *song);
+}				g_mpd_vars[] = {
 	MPDPRINT(path),
 	MPDPRINT(title),
 	MPDPRINT(artist),
@@ -114,9 +114,9 @@ void print_mpd(yajl_gen json_gen, char* buffer,
 		{
 			START_COLOR("color_bad");
 			outwalk += sprintf(buffer, "%s", format_off);
-#			ifdef DEBUG
+#								ifdef DEBUG
 			fprintf(stderr, "mdp: no connection: %s\n", mpd_connection_get_error_message(co));
-#			endif
+#								endif
 			goto end;
 		}
 	}
@@ -131,9 +131,9 @@ void print_mpd(yajl_gen json_gen, char* buffer,
 	{
 		START_COLOR("color_bad");
 		outwalk += sprintf(buffer, "%s", format_off);
-#		ifdef DEBUG
+#								ifdef DEBUG
 		fprintf(stderr, "mdp: no status\n");
-#		endif
+#								endif
 		goto end;
 	}
 	mpd_response_next(co);
@@ -142,9 +142,9 @@ void print_mpd(yajl_gen json_gen, char* buffer,
 	{
 		START_COLOR("color_bad");
 		outwalk += sprintf(buffer, "%s", format_off);
-#		ifdef DEBUG
+#								ifdef DEBUG
 		fprintf(stderr, "mdp: no song\n");
-#		endif
+#								endif
 		goto end;
 	}
 
@@ -207,3 +207,4 @@ void print_mpd(yajl_gen json_gen, char* buffer,
 	END_COLOR;
 	OUTPUT_FULL_TEXT(buffer);
 }
+
