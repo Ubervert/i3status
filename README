@@ -5,6 +5,14 @@ THIS IS AN UNOFFICIAL FORK!
  └────────────────────────────┘
 This fork adds mpd and pianobar output.
 
+For pianobar support, you must move i3status/contrib/eventcmd.sh to
+~/.config/pianobar/
+
+Additionally, you must enable the script in ~/.config/pianobar/config
+
+Alias pianobar to pianobar && echo '-' > ~/.config/pianobar/nowplaying
+	This will clear the status bar when pianobar closes 
+
 mpd support created by:
  https://github.com/Gravemind/i3status.git	
 
