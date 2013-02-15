@@ -8,6 +8,8 @@ This fork adds mpd and pianobar output.
 For pianobar support, you must move i3status/contrib/eventcmd.sh to
 ~/.config/pianobar/
 
+To config pianobar output, edit the script with the defined variables inside it.
+
 Additionally, you must enable the script in ~/.config/pianobar/config
 
 Add to bashrc
